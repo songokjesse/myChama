@@ -5,6 +5,8 @@ const logger = require('morgan')
 
 const routes = require('./routes')
 const Users = require('./routes/users')
+const myChama = require('./routes/chama')
+
 const PORT = process.env.PORT || 3000
 
 const app = express();
@@ -14,11 +16,13 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
-app.use(logger('combined'))
+app.use(logger('dev'))
 app.use(cors())
 
 app.use('/', routes)
 app.use('/api/v1/users', Users)
+app.use('/api/v1/myChama', myChama)
+
 
 //catch 404 and forward to error handler
 app.use((req,res,next)=>{
