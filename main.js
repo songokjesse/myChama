@@ -4,7 +4,7 @@ const cors = require('cors')
 const logger = require('morgan')
 
 const routes = require('./routes')
-
+const Users = require('./routes/users')
 const PORT = process.env.PORT || 3000
 
 const app = express();
@@ -18,6 +18,7 @@ app.use(logger('combined'))
 app.use(cors())
 
 app.use('/', routes)
+app.use('/api/v1/users', Users)
 app.listen(PORT, () => {
     console.log(`Listening on post :${PORT}`)
 })

@@ -8,10 +8,13 @@ datasource db {
 }
 
 model Profile {
-  id     Int     @id @default(autoincrement())
-  bio    String?
-  userId Int     @unique
-  user   User    @relation(fields: [userId], references: [id])
+  id                Int                @id @default(autoincrement())
+  bio               String?
+  idNumber          Int                @unique
+  phoneNumber       String?
+  userId            Int                @unique
+  user              User               @relation(fields: [userId], references: [id])
+  chamaContribution chamaContribution?
 }
 
 model User {
@@ -19,4 +22,20 @@ model User {
   name    String?
   email   String   @unique
   profile Profile?
+}
+
+model chamaContribution {
+  id                Int     @id @default(autoincrement())
+  myChamaId         Int     @unique
+  profileId         Int     @unique
+  amountContributed Int
+  myChama           myChama @relation(fields: [myChamaId], references: [id])
+  Profile           Profile @relation(fields: [profileId], references: [id])
+}
+
+model myChama {
+  id                Int                @id @default(autoincrement())
+  chamaName         String?
+  chamaDescription  String?
+  chamaContribution chamaContribution?
 }
