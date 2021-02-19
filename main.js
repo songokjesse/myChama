@@ -6,6 +6,8 @@ const logger = require('morgan')
 const routes = require('./routes')
 const Users = require('./routes/users')
 const myChama = require('./routes/chama')
+const Auth = require('./routes/auth')
+
 
 const PORT = process.env.PORT || 3000
 
@@ -22,6 +24,8 @@ app.use(cors())
 app.use('/', routes)
 app.use('/api/v1/users', Users)
 app.use('/api/v1/myChama', myChama)
+app.use('/api/v1/auth', Auth)
+
 
 
 //catch 404 and forward to error handler
