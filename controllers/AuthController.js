@@ -26,7 +26,7 @@ const Register = async (req,res,next)=>{
         })
         //generate token for new user
         const token = generateToken(UserCreated)
-        res.status(200).send({ "user":  UserCreated, "access_token": token})
+        res.status(200).send({ "user":  UserCreated, "token": token})
 
     }catch(error){
         res.status(403).send(error)
@@ -37,6 +37,7 @@ const Register = async (req,res,next)=>{
     } 
 }
 const Login = async (req,res,next)=>{
+	console.log(req.body)
     const {email, password } = req.body
     try {
         const user = await prisma.user.findUnique({
@@ -54,7 +55,7 @@ const Login = async (req,res,next)=>{
 
         //generate token for new user
         const token = generateToken(user.email)
-        res.status(200).send({ "Status": "Success" ,"user":  user.email, "access_token": token})
+        res.status(200).send({ "Status": "Success" ,"user":  user.email, "token": token})
     }catch(error){
             return res.status(403).send({"Status": "Error", "Message": error})
     }finally{
